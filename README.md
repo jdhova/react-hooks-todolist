@@ -10,3 +10,8 @@ under construction
 
 React.js
 
+### Start App
+npm start
+
+###  Install Dependencies
+Npm install

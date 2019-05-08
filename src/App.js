@@ -2,43 +2,82 @@ import React, { useState } from 'react';
 import './App.css'
 
 
+
 function Todo({ todo, index}) {
-  return <div className='todo'>{todo.text}</div>
+  return <div className ='todo'> {todo.text} </div>
 }
 
+function TodoForm({addTodo}) {
+  const [value, setValue] = useState('')
 
-function App()
+  const handleSubmit = (e) => {
+    if(!value)  return
+    e.preventDefault()
+    addTodo(value)
+    setValue('')
+
+  }
+
+  const handleChange = (e) => {
+    setValue(e.target.value)
+    
+  }
+
+
+ 
+
+  return(
+    <form onSubmit = {handleSubmit} >
+      <input type = 'text' placeholder = 'add todo' className= 'input' value={value} onChange = {handleChange} />
+      
+      {/* // {e => setValue(e.target.value)} /> */}
+
+    </form>
+  )
+}
+
+function App(){
+  
+  const [todos, setTodos] = useState ([
+
     {
-  const [todos, setTodos ] = useState ([
-
-    { 
-      text: 'Learn JavaScript Algorithm and Data Strictures',
-      isCompleted: false
+      text: 'learn Python',
+      isCompleted: 'false'
     },
-    { 
-      text: 'Build Vue.js Application',
-      isCompleted: false
+    {
+      text: 'Learn on Vue.js',
+      isCompleted: 'false'
     },
-    { 
-      text: 'Learn Python',
-      isCompleted: false
+    {
+      text: 'Learn React Native',
+      isCompleted: 'false'
     },
-    { 
-      text: 'Build app with React Native',
-      isCompleted: false
+    {
+      text: 'Learn QA Testing',
+      isCompleted: 'false'
     },
 
   ])
-   return (
-     <div className='app'>
-      <div className='todo-list'>
-          {todos.map((todo,index) => (
-            <Todo key={index}  index={index} todo={todo}/>
-          ))}
+
+  const addTodo = text => {
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
+  };
+
+  return(
+    <div className= 'app'>
+        <div className='todo-list'>
+        {todos.map((todo, index) => (
+          <Todo  key={index} index ={index} todo={todo} 
+          />
+        ))}
+        
+        <TodoForm addTodo ={addTodo} />
+ </div> 
       </div>
-     </div>
-   )
+  )
 }
+
 
 export default App
 
@@ -52,29 +91,3 @@ export default App
 
 
 
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
